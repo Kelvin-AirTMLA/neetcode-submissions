@@ -1,23 +1,21 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
+        cleaned = "".join(char for char in s if char.isalnum())
+        cleaned = cleaned.lower()
 
-        new_string = ""
-        for i in range(len(s)):
-            if s[i].isalnum():
-                new_string += s[i]
+        n = len(cleaned)
 
-        new_string = new_string.casefold()
-        new_string = new_string.replace(" ", "")
-        print(new_string)
-        n = len(new_string)
-        left = n - 1
+        if n <= 1:
+            return True
 
-        for right in range(len(new_string)):
-            if new_string[right].isalnum():
-                if new_string[right] != new_string[left]:
-                    print(new_string[right], new_string[left])
-                    return False
+        l = 0
+        r = n - 1
 
-            left -= 1
-        return True
+        while l < r and cleaned[l] == cleaned[r]:
+            l += 1
+            r -= 1
 
+            if l >= r:
+                return True
+
+        return False
